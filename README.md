@@ -1,1 +1,1 @@
-# media-manager
+Repository holding code projects for a media manager that can be used with Plex
