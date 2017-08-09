@@ -378,6 +378,20 @@
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
+    <Diagrams>
+      <Diagram DiagramId="7c76815f434a4deab533c9fb85453a7e" Name="Diagram1">
+        <EntityTypeShape EntityType="MovieModel.Format" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.Movie" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.MPAARating" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.Own" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.Purchase" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.Vote" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <AssociationConnector Association="MovieModel.FK_Own_Format" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieModel.FK_Movie_MPAARating" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieModel.FK_Own_Movie" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieModel.FK_Purchase_Movie" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieModel.FK_Vote_Movie" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
   </Designer>
 </edmx:Edmx>
