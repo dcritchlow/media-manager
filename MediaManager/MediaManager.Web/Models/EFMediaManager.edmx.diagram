@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4616d7b6a77d4bc7b8fe7ecc0b2d67d4" Name="Diagram1" ZoomLevel="96" >
+        <EntityTypeShape EntityType="MediaManagerModel.Format" Width="1.5" PointX="5.75" PointY="0.5" />
+        <EntityTypeShape EntityType="MediaManagerModel.Movie" Width="1.5" PointX="3.375" PointY="2.75" />
+        <EntityTypeShape EntityType="MediaManagerModel.MPAARating" Width="1.5" PointX="1.25" PointY="5" />
+        <EntityTypeShape EntityType="MediaManagerModel.Own" Width="1.5" PointX="5.625" PointY="2.75" />
+        <EntityTypeShape EntityType="MediaManagerModel.Purchase" Width="1.5" PointX="0.75" PointY="2.625" />
+        <EntityTypeShape EntityType="MediaManagerModel.Vote" Width="1.5" PointX="3.375" PointY="6" />
+        <AssociationConnector Association="MediaManagerModel.FK_Own_Format" />
+        <AssociationConnector Association="MediaManagerModel.FK_Movie_MPAARating" />
+        <AssociationConnector Association="MediaManagerModel.FK_Own_Movie" />
+        <AssociationConnector Association="MediaManagerModel.FK_Purchase_Movie" />
+        <AssociationConnector Association="MediaManagerModel.FK_Vote_Movie" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
