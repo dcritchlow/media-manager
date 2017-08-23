@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MediaManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Formats">
+          <Key>
+            <PropertyRef Name="FormatId" />
+          </Key>
+          <Property Name="FormatId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Movies">
+          <Key>
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="MovieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MPAARatingId" Type="int" Nullable="false" />
+          <Property Name="Tittle" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Summary" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="MPAARatings">
+          <Key>
+            <PropertyRef Name="MPAARatingId" />
+          </Key>
+          <Property Name="MPAARatingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rating" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Owns">
+          <Key>
+            <PropertyRef Name="OwnId" />
+          </Key>
+          <Property Name="OwnId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieId" Type="int" Nullable="false" />
+          <Property Name="FormatId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Purchases">
+          <Key>
+            <PropertyRef Name="PurchasingId" />
+          </Key>
+          <Property Name="PurchasingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Votes">
+          <Key>
+            <PropertyRef Name="VotesId" />
+          </Key>
+          <Property Name="VotesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Movie_MPAARating">
+          <End Role="MPAARatings" Type="Self.MPAARatings" Multiplicity="1" />
+          <End Role="Movies" Type="Self.Movies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MPAARatings">
+              <PropertyRef Name="MPAARatingId" />
+            </Principal>
+            <Dependent Role="Movies">
+              <PropertyRef Name="MPAARatingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Own_Format">
+          <End Role="Formats" Type="Self.Formats" Multiplicity="1" />
+          <End Role="Owns" Type="Self.Owns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formats">
+              <PropertyRef Name="FormatId" />
+            </Principal>
+            <Dependent Role="Owns">
+              <PropertyRef Name="FormatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Own_Movie">
+          <End Role="Movies" Type="Self.Movies" Multiplicity="1" />
+          <End Role="Owns" Type="Self.Owns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieId" />
+            </Principal>
+            <Dependent Role="Owns">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Purchase_Movie">
+          <End Role="Movies" Type="Self.Movies" Multiplicity="1" />
+          <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieId" />
+            </Principal>
+            <Dependent Role="Purchases">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vote_Movie">
+          <End Role="Movies" Type="Self.Movies" Multiplicity="1" />
+          <End Role="Votes" Type="Self.Votes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieId" />
+            </Principal>
+            <Dependent Role="Votes">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MediaManagerModelStoreContainer">
+          <EntitySet Name="Formats" EntityType="Self.Formats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movies" EntityType="Self.Movies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MPAARatings" EntityType="Self.MPAARatings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Owns" EntityType="Self.Owns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Purchases" EntityType="Self.Purchases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Votes" EntityType="Self.Votes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Movie_MPAARating" Association="Self.FK_Movie_MPAARating">
+            <End Role="MPAARatings" EntitySet="MPAARatings" />
+            <End Role="Movies" EntitySet="Movies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Own_Format" Association="Self.FK_Own_Format">
+            <End Role="Formats" EntitySet="Formats" />
+            <End Role="Owns" EntitySet="Owns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Own_Movie" Association="Self.FK_Own_Movie">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Owns" EntitySet="Owns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Purchase_Movie" Association="Self.FK_Purchase_Movie">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Purchases" EntitySet="Purchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vote_Movie" Association="Self.FK_Vote_Movie">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Votes" EntitySet="Votes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MediaManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MediaManagerEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Formats" EntityType="MediaManagerModel.Format" />
+          <EntitySet Name="Movies" EntityType="MediaManagerModel.Movie" />
+          <EntitySet Name="MPAARatings" EntityType="MediaManagerModel.MPAARating" />
+          <EntitySet Name="Owns" EntityType="MediaManagerModel.Own" />
+          <EntitySet Name="Purchases" EntityType="MediaManagerModel.Purchase" />
+          <EntitySet Name="Votes" EntityType="MediaManagerModel.Vote" />
+          <AssociationSet Name="FK_Own_Format" Association="MediaManagerModel.FK_Own_Format">
+            <End Role="Format" EntitySet="Formats" />
+            <End Role="Own" EntitySet="Owns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movie_MPAARating" Association="MediaManagerModel.FK_Movie_MPAARating">
+            <End Role="MPAARating" EntitySet="MPAARatings" />
+            <End Role="Movie" EntitySet="Movies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Own_Movie" Association="MediaManagerModel.FK_Own_Movie">
+            <End Role="Movie" EntitySet="Movies" />
+            <End Role="Own" EntitySet="Owns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Purchase_Movie" Association="MediaManagerModel.FK_Purchase_Movie">
+            <End Role="Movie" EntitySet="Movies" />
+            <End Role="Purchase" EntitySet="Purchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vote_Movie" Association="MediaManagerModel.FK_Vote_Movie">
+            <End Role="Movie" EntitySet="Movies" />
+            <End Role="Vote" EntitySet="Votes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Format">
+          <Key>
+            <PropertyRef Name="FormatId" />
+          </Key>
+          <Property Name="FormatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Owns" Relationship="MediaManagerModel.FK_Own_Format" FromRole="Format" ToRole="Own" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="MovieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MPAARatingId" Type="Int32" Nullable="false" />
+          <Property Name="Tittle" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MPAARating" Relationship="MediaManagerModel.FK_Movie_MPAARating" FromRole="Movie" ToRole="MPAARating" />
+          <NavigationProperty Name="Owns" Relationship="MediaManagerModel.FK_Own_Movie" FromRole="Movie" ToRole="Own" />
+          <NavigationProperty Name="Purchases" Relationship="MediaManagerModel.FK_Purchase_Movie" FromRole="Movie" ToRole="Purchase" />
+          <NavigationProperty Name="Votes" Relationship="MediaManagerModel.FK_Vote_Movie" FromRole="Movie" ToRole="Vote" />
+        </EntityType>
+        <EntityType Name="MPAARating">
+          <Key>
+            <PropertyRef Name="MPAARatingId" />
+          </Key>
+          <Property Name="MPAARatingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rating" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Movies" Relationship="MediaManagerModel.FK_Movie_MPAARating" FromRole="MPAARating" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="Own">
+          <Key>
+            <PropertyRef Name="OwnId" />
+          </Key>
+          <Property Name="OwnId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <Property Name="FormatId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Format" Relationship="MediaManagerModel.FK_Own_Format" FromRole="Own" ToRole="Format" />
+          <NavigationProperty Name="Movie" Relationship="MediaManagerModel.FK_Own_Movie" FromRole="Own" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="Purchase">
+          <Key>
+            <PropertyRef Name="PurchasingId" />
+          </Key>
+          <Property Name="PurchasingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Movie" Relationship="MediaManagerModel.FK_Purchase_Movie" FromRole="Purchase" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="Vote">
+          <Key>
+            <PropertyRef Name="VotesId" />
+          </Key>
+          <Property Name="VotesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Movie" Relationship="MediaManagerModel.FK_Vote_Movie" FromRole="Vote" ToRole="Movie" />
+        </EntityType>
+        <Association Name="FK_Own_Format">
+          <End Type="MediaManagerModel.Format" Role="Format" Multiplicity="1" />
+          <End Type="MediaManagerModel.Own" Role="Own" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Format">
+              <PropertyRef Name="FormatId" />
+            </Principal>
+            <Dependent Role="Own">
+              <PropertyRef Name="FormatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movie_MPAARating">
+          <End Type="MediaManagerModel.MPAARating" Role="MPAARating" Multiplicity="1" />
+          <End Type="MediaManagerModel.Movie" Role="Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MPAARating">
+              <PropertyRef Name="MPAARatingId" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="MPAARatingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Own_Movie">
+          <End Type="MediaManagerModel.Movie" Role="Movie" Multiplicity="1" />
+          <End Type="MediaManagerModel.Own" Role="Own" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="MovieId" />
+            </Principal>
+            <Dependent Role="Own">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Purchase_Movie">
+          <End Type="MediaManagerModel.Movie" Role="Movie" Multiplicity="1" />
+          <End Type="MediaManagerModel.Purchase" Role="Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="MovieId" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vote_Movie">
+          <End Type="MediaManagerModel.Movie" Role="Movie" Multiplicity="1" />
+          <End Type="MediaManagerModel.Vote" Role="Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="MovieId" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MediaManagerModelStoreContainer" CdmEntityContainer="MediaManagerEntities">
+    <EntitySetMapping Name="Formats">
+      <EntityTypeMapping TypeName="IsTypeOf(MediaManagerModel.Format)">
+        <MappingFragment StoreEntitySet="Formats">
+          <ScalarProperty Name="FormatId" ColumnName="FormatId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movies">
+      <EntityTypeMapping TypeName="IsTypeOf(MediaManagerModel.Movie)">
+        <MappingFragment StoreEntitySet="Movies">
+          <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+          <ScalarProperty Name="MPAARatingId" ColumnName="MPAARatingId" />
+          <ScalarProperty Name="Tittle" ColumnName="Tittle" />
+          <ScalarProperty Name="Summary" ColumnName="Summary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MPAARatings">
+      <EntityTypeMapping TypeName="IsTypeOf(MediaManagerModel.MPAARating)">
+        <MappingFragment StoreEntitySet="MPAARatings">
+          <ScalarProperty Name="MPAARatingId" ColumnName="MPAARatingId" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Owns">
+      <EntityTypeMapping TypeName="IsTypeOf(MediaManagerModel.Own)">
+        <MappingFragment StoreEntitySet="Owns">
+          <ScalarProperty Name="OwnId" ColumnName="OwnId" />
+          <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+          <ScalarProperty Name="FormatId" ColumnName="FormatId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Purchases">
+      <EntityTypeMapping TypeName="IsTypeOf(MediaManagerModel.Purchase)">
+        <MappingFragment StoreEntitySet="Purchases">
+          <ScalarProperty Name="PurchasingId" ColumnName="PurchasingId" />
+          <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Votes">
+      <EntityTypeMapping TypeName="IsTypeOf(MediaManagerModel.Vote)">
+        <MappingFragment StoreEntitySet="Votes">
+          <ScalarProperty Name="VotesId" ColumnName="VotesId" />
+          <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
