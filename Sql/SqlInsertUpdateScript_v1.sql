@@ -96,9 +96,9 @@ GO
 --		(
 --			TableNameID INT IDENTITY (1,1)
 --			, ColumnNameA VARCHAR(50) NOT NULL
---			, AuditInfo_CreatedAt DATETIME2(2) NOT NULL
+--			, AuditInfo_CreatedAt DATETIME2(3) NOT NULL
 --			, AuditInfo_CreatedBy VARCHAR(200) NOT NULL
---			, AuditInfo_ModifiedAt DATETIME2(2) NULL
+--			, AuditInfo_ModifiedAt DATETIME2(3) NULL
 --			, AuditInfo_ModifiedBy VARCHAR(200) NULL
 --			, CONSTRAINT PK_TableName PRIMARY KEY CLUSTERED 
 --				(
@@ -136,9 +136,9 @@ BEGIN TRY
 		(
 			MPAARatingID INT IDENTITY (1,1)
 			, MPAARating VARCHAR(200) NOT NULL
-			, AuditInfo_CreatedAt DATETIME2(2) NOT NULL
+			, AuditInfo_CreatedAt DATETIME2(3) NOT NULL
 			, AuditInfo_CreatedBy VARCHAR(200) NOT NULL
-			, AuditInfo_ModifiedAt DATETIME2(2) NULL
+			, AuditInfo_ModifiedAt DATETIME2(3) NULL
 			, AuditInfo_ModifiedBy VARCHAR(200) NULL
 			, CONSTRAINT PK_MPAARating PRIMARY KEY CLUSTERED 
 				(
@@ -175,9 +175,9 @@ BEGIN TRY
 		(
 			TVRatingID INT IDENTITY (1,1)
 			, TVShowRating VARCHAR(200) NOT NULL
-			, AuditInfo_CreatedAt DATETIME2(2) NOT NULL
+			, AuditInfo_CreatedAt DATETIME2(3) NOT NULL
 			, AuditInfo_CreatedBy VARCHAR(200) NOT NULL
-			, AuditInfo_ModifiedAt DATETIME2(2) NULL
+			, AuditInfo_ModifiedAt DATETIME2(3) NULL
 			, AuditInfo_ModifiedBy VARCHAR(200) NULL
 			, CONSTRAINT PK_TVRating PRIMARY KEY CLUSTERED 
 				(
@@ -214,9 +214,9 @@ BEGIN TRY
 		(
 			FormatID INT IDENTITY (1,1)
 			, FormatName VARCHAR(200) NOT NULL
-			, AuditInfo_CreatedAt DATETIME2(2) NOT NULL
+			, AuditInfo_CreatedAt DATETIME2(3) NOT NULL
 			, AuditInfo_CreatedBy VARCHAR(200) NOT NULL
-			, AuditInfo_ModifiedAt DATETIME2(2) NULL
+			, AuditInfo_ModifiedAt DATETIME2(3) NULL
 			, AuditInfo_ModifiedBy VARCHAR(200) NULL
 			, CONSTRAINT PK_Format PRIMARY KEY CLUSTERED 
 				(
@@ -253,9 +253,9 @@ BEGIN TRY
 		(
 			OwnerID INT IDENTITY (1,1)
 			, OwnerName VARCHAR(200) NOT NULL
-			, AuditInfo_CreatedAt DATETIME2(2) NOT NULL
+			, AuditInfo_CreatedAt DATETIME2(3) NOT NULL
 			, AuditInfo_CreatedBy VARCHAR(200) NOT NULL
-			, AuditInfo_ModifiedAt DATETIME2(2) NULL
+			, AuditInfo_ModifiedAt DATETIME2(3) NULL
 			, AuditInfo_ModifiedBy VARCHAR(200) NULL
 			, CONSTRAINT PK_Owner PRIMARY KEY CLUSTERED 
 				(
@@ -293,13 +293,16 @@ BEGIN TRY
 			MovieID INT IDENTITY (1,1)
 			, MovieTitle VARCHAR(200) NOT NULL
 			, MovieSummary VARCHAR(MAX) NULL
-			, ReleaseDate DATETIME2(2) NULL
-            , Purchased BIT NOT NULL
+			, ReleaseDate DATETIME2(3) NULL
+			, Year VARCHAR(4) NULL
+			, Poster VARCHAR(200) NULL
+			, ImdbId VARCHAR(20) NULL
+			, Purchased BIT NOT NULL
 			, MPAARatingId INT NOT NULL
 			, FormatId INT NOT NULL
-			, AuditInfo_CreatedAt DATETIME2(2) NOT NULL
+			, AuditInfo_CreatedAt DATETIME2(3) NOT NULL
 			, AuditInfo_CreatedBy VARCHAR(200) NOT NULL
-			, AuditInfo_ModifiedAt DATETIME2(2) NULL
+			, AuditInfo_ModifiedAt DATETIME2(3) NULL
 			, AuditInfo_ModifiedBy VARCHAR(200) NULL
 			, CONSTRAINT PK_Movie PRIMARY KEY CLUSTERED 
 				(
@@ -345,9 +348,9 @@ BEGIN TRY
 			MovieOwnerID INT IDENTITY (1,1)
 			, MovieID INT NOT NULL
             , OwnerID INT NOT NULL
-			, AuditInfo_CreatedAt DATETIME2(2) NOT NULL
+			, AuditInfo_CreatedAt DATETIME2(3) NOT NULL
 			, AuditInfo_CreatedBy VARCHAR(200) NOT NULL
-			, AuditInfo_ModifiedAt DATETIME2(2) NULL
+			, AuditInfo_ModifiedAt DATETIME2(3) NULL
 			, AuditInfo_ModifiedBy VARCHAR(200) NULL
 			, CONSTRAINT PK_MovieOwner PRIMARY KEY CLUSTERED 
 				(
@@ -393,9 +396,9 @@ BEGIN TRY
 			MovieWishListID INT IDENTITY (1,1)
 			, MovieID INT NOT NULL
             , Purchased BIT
-			, AuditInfo_CreatedAt DATETIME2(2) NOT NULL
+			, AuditInfo_CreatedAt DATETIME2(3) NOT NULL
 			, AuditInfo_CreatedBy VARCHAR(200) NOT NULL
-			, AuditInfo_ModifiedAt DATETIME2(2) NULL
+			, AuditInfo_ModifiedAt DATETIME2(3) NULL
 			, AuditInfo_ModifiedBy VARCHAR(200) NULL
 			, CONSTRAINT PK_MovieWishList PRIMARY KEY CLUSTERED 
 				(
@@ -437,15 +440,16 @@ BEGIN TRY
 			TVShowID INT IDENTITY (1,1)
 			, TVShowTitle VARCHAR(200) NOT NULL
 			, TVShowSummary VARCHAR(MAX) NULL
-			, ReleaseDate DATETIME2(2) NULL
-			, EndDate DATETIME2(2) NULL
+			, ReleaseDate DATETIME2(3) NULL
+			, EndDate DATETIME2(3) NULL
 			, NumberOfSeasons INT NULL
-            , Purchased BIT NOT NULL
+			, Poster VARCHAR(200) NULL
+      , Purchased BIT NOT NULL
 			, TVRatingID INT NOT NULL
 			, FormatId INT NOT NULL
-			, AuditInfo_CreatedAt DATETIME2(2) NOT NULL
+			, AuditInfo_CreatedAt DATETIME2(3) NOT NULL
 			, AuditInfo_CreatedBy VARCHAR(200) NOT NULL
-			, AuditInfo_ModifiedAt DATETIME2(2) NULL
+			, AuditInfo_ModifiedAt DATETIME2(3) NULL
 			, AuditInfo_ModifiedBy VARCHAR(200) NULL
 			, CONSTRAINT PK_TVShow PRIMARY KEY CLUSTERED 
 				(
@@ -487,9 +491,9 @@ BEGIN TRY
 			TVOwnerID INT IDENTITY (1,1)
 			, TVShowID INT NOT NULL
             , OwnerID INT NOT NULL
-			, AuditInfo_CreatedAt DATETIME2(2) NOT NULL
+			, AuditInfo_CreatedAt DATETIME2(3) NOT NULL
 			, AuditInfo_CreatedBy VARCHAR(200) NOT NULL
-			, AuditInfo_ModifiedAt DATETIME2(2) NULL
+			, AuditInfo_ModifiedAt DATETIME2(3) NULL
 			, AuditInfo_ModifiedBy VARCHAR(200) NULL
 			, CONSTRAINT PK_TVOwner PRIMARY KEY CLUSTERED 
 				(
@@ -536,9 +540,9 @@ BEGIN TRY
 			TVShowWishListID INT IDENTITY (1,1)
 			, TVShowID INT NOT NULL
             , Purchased BIT
-			, AuditInfo_CreatedAt DATETIME2(2) NOT NULL
+			, AuditInfo_CreatedAt DATETIME2(3) NOT NULL
 			, AuditInfo_CreatedBy VARCHAR(200) NOT NULL
-			, AuditInfo_ModifiedAt DATETIME2(2) NULL
+			, AuditInfo_ModifiedAt DATETIME2(3) NULL
 			, AuditInfo_ModifiedBy VARCHAR(200) NULL
 			, CONSTRAINT PK_TVShowWishList PRIMARY KEY CLUSTERED 
 				(
@@ -581,9 +585,9 @@ BEGIN TRY
 			, MovieID INT NOT NULL
             , MovieVoteCount INT NOT NULL
             , UserName VARCHAR(200) NOT NULL
-			, AuditInfo_CreatedAt DATETIME2(2) NOT NULL
+			, AuditInfo_CreatedAt DATETIME2(3) NOT NULL
 			, AuditInfo_CreatedBy VARCHAR(200) NOT NULL
-			, AuditInfo_ModifiedAt DATETIME2(2) NULL
+			, AuditInfo_ModifiedAt DATETIME2(3) NULL
 			, AuditInfo_ModifiedBy VARCHAR(200) NULL
 			, CONSTRAINT PK_MovieVote PRIMARY KEY CLUSTERED 
 				(
@@ -626,9 +630,9 @@ BEGIN TRY
 			, TVShowID INT NOT NULL
             , TVShowVoteCount INT NOT NULL
             , UserName VARCHAR(200) NOT NULL
-			, AuditInfo_CreatedAt DATETIME2(2) NOT NULL
+			, AuditInfo_CreatedAt DATETIME2(3) NOT NULL
 			, AuditInfo_CreatedBy VARCHAR(200) NOT NULL
-			, AuditInfo_ModifiedAt DATETIME2(2) NULL
+			, AuditInfo_ModifiedAt DATETIME2(3) NULL
 			, AuditInfo_ModifiedBy VARCHAR(200) NULL
 			, CONSTRAINT PK_TVShowVote PRIMARY KEY CLUSTERED 
 				(
@@ -736,12 +740,14 @@ BEGIN TRY
         DELETE FROM [MediaManager].[MPAARating] where MPAARating = 'PG-13'
         DELETE FROM [MediaManager].[MPAARating] where MPAARating = 'R'
         DELETE FROM [MediaManager].[MPAARating] where MPAARating = 'NC-17'
+        DELETE FROM [MediaManager].[MPAARating] where MPAARating = 'NOT RATED'
 
 		INSERT [MediaManager].[MPAARating] (MPAARating, AuditInfo_CreatedAt, AuditInfo_CreatedBy) VALUES ('G', SYSDATETIME(), CURRENT_USER)
 		INSERT [MediaManager].[MPAARating] (MPAARating, AuditInfo_CreatedAt, AuditInfo_CreatedBy) VALUES ('PG', SYSDATETIME(), CURRENT_USER)
 		INSERT [MediaManager].[MPAARating] (MPAARating, AuditInfo_CreatedAt, AuditInfo_CreatedBy) VALUES ('PG-13', SYSDATETIME(), CURRENT_USER)
 		INSERT [MediaManager].[MPAARating] (MPAARating, AuditInfo_CreatedAt, AuditInfo_CreatedBy) VALUES ('R', SYSDATETIME(), CURRENT_USER)
 		INSERT [MediaManager].[MPAARating] (MPAARating, AuditInfo_CreatedAt, AuditInfo_CreatedBy) VALUES ('NC-17', SYSDATETIME(), CURRENT_USER)
+		INSERT [MediaManager].[MPAARating] (MPAARating, AuditInfo_CreatedAt, AuditInfo_CreatedBy) VALUES ('NOT RATED', SYSDATETIME(), CURRENT_USER)
 
 	COMMIT TRANSACTION InsertMPAARatingData
 
@@ -808,6 +814,15 @@ BEGIN TRY
 		INSERT [MediaManager].[Owner] (OwnerName, AuditInfo_CreatedAt, AuditInfo_CreatedBy) VALUES ('Richard Simons', SYSDATETIME(), CURRENT_USER)
 		INSERT [MediaManager].[Owner] (OwnerName, AuditInfo_CreatedAt, AuditInfo_CreatedBy) VALUES ('Todd Simons', SYSDATETIME(), CURRENT_USER)
 		INSERT [MediaManager].[Owner] (OwnerName, AuditInfo_CreatedAt, AuditInfo_CreatedBy) VALUES ('Darin Critchlow', SYSDATETIME(), CURRENT_USER)
+		INSERT [MediaManager].[Owner] (OwnerName, AuditInfo_CreatedAt, AuditInfo_CreatedBy) VALUES ('Coleen', SYSDATETIME(), CURRENT_USER)
+		INSERT [MediaManager].[Owner] (OwnerName, AuditInfo_CreatedAt, AuditInfo_CreatedBy) VALUES ('Dave', SYSDATETIME(), CURRENT_USER)
+		INSERT [MediaManager].[Owner] (OwnerName, AuditInfo_CreatedAt, AuditInfo_CreatedBy) VALUES ('Kyle-Jay Critchlow', SYSDATETIME(), CURRENT_USER)
+		INSERT [MediaManager].[Owner] (OwnerName, AuditInfo_CreatedAt, AuditInfo_CreatedBy) VALUES ('Lee', SYSDATETIME(), CURRENT_USER)
+		INSERT [MediaManager].[Owner] (OwnerName, AuditInfo_CreatedAt, AuditInfo_CreatedBy) VALUES ('Nichol Valadez', SYSDATETIME(), CURRENT_USER)
+		INSERT [MediaManager].[Owner] (OwnerName, AuditInfo_CreatedAt, AuditInfo_CreatedBy) VALUES ('Ronnie', SYSDATETIME(), CURRENT_USER)
+		INSERT [MediaManager].[Owner] (OwnerName, AuditInfo_CreatedAt, AuditInfo_CreatedBy) VALUES ('Ryan', SYSDATETIME(), CURRENT_USER)
+		INSERT [MediaManager].[Owner] (OwnerName, AuditInfo_CreatedAt, AuditInfo_CreatedBy) VALUES ('Thuan', SYSDATETIME(), CURRENT_USER)
+		INSERT [MediaManager].[Owner] (OwnerName, AuditInfo_CreatedAt, AuditInfo_CreatedBy) VALUES ('Cassidy Simons', SYSDATETIME(), CURRENT_USER)
 
 	COMMIT TRANSACTION InsertOwnerData
 
