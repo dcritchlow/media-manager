@@ -286,3 +286,9 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+/MediaManager/LoadMoviesAndOwnersFromExcel/AppSettings.config
+/MediaManager/LoadMoviesAndOwnersFromExcel/ConnectionStrings.config
+/MediaManager/MediaManager.MovieInformationComponent/AppSettings.config
+/MediaManager/LoadMoviesAndOwnersFromCsv/SpecialApplicationSettings.config
+/MediaManager/LoadMoviesAndOwnersFromCsv/ConnectionStrings.config
+/MediaManager/MediaManager.Web/ConnectionStrings.config

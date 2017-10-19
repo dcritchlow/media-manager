@@ -1,0 +1,12 @@
+DROP TABLE MediaManager.MovieVote
+DROP TABLE MediaManager.TVShowVote
+DROP TABLE MediaManager.TVShowWishList
+DROP TABLE MediaManager.MovieWishList
+DROP TABLE MediaManager.TVOwner
+DROP TABLE MediaManager.MovieOwner
+DROP TABLE MediaManager.TVShow
+DROP TABLE MediaManager.Movie
+DROP TABLE MediaManager.OWNER
+DROP TABLE MediaManager.MPAARating
+DROP TABLE MediaManager.Format
+DROP TABLE MediaManager.TVRating
