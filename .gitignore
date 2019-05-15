@@ -292,3 +292,5 @@ __pycache__/
 /MediaManager/LoadMoviesAndOwnersFromCsv/SpecialApplicationSettings.config
 /MediaManager/LoadMoviesAndOwnersFromCsv/ConnectionStrings.config
 /MediaManager/MediaManager.Web/ConnectionStrings.config
+/MediaManager/ConnectionStrings.config
+/MediaManager/MediaManager.LibraryComponent.Tests/Repositories/MovieRepositoriesTestRichard.cs

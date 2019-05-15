@@ -66,7 +66,45 @@ namespace MediaManager.LibraryComponent.Tests.Repositories
       Assert.That(movies.Any());
     }
 
-    private static void SetupDbSet<TEntity>(Mock<DbSet<TEntity>> mockSet, IQueryable<TEntity> querySet) where TEntity : class
+
+        [Test]
+        public void AddMovieNullTest()
+        {
+            var mockMovieRepository = new Mock<IMovieRepository>().Object;
+            Assert.That(() => mockMovieRepository.AddMovie(null), Throws.TypeOf<ArgumentNullException>());
+        }
+        [Test]
+        public void AddMovieNullStingsTest()
+        {
+            var mockMovieRepository = new Mock<IMovieRepository>().Object;
+            Assert.That(() => mockMovieRepository.AddMovie(null, string.Empty, DateTime.Today, string.Empty,
+                string.Empty, true, MovieMpaaRating.G, Format.Dvd, string.Empty, string.Empty),
+                Throws.TypeOf<ArgumentNullException>());
+
+            Assert.That(() => mockMovieRepository.AddMovie(string.Empty, null, DateTime.Today, string.Empty,
+                string.Empty, true, MovieMpaaRating.G, Format.Dvd, string.Empty, string.Empty),
+                Throws.TypeOf<ArgumentNullException>());
+
+            Assert.That(() => mockMovieRepository.AddMovie(string.Empty, string.Empty, DateTime.Today, null,
+                string.Empty, true, MovieMpaaRating.G, Format.Dvd, string.Empty, string.Empty),
+                Throws.TypeOf<ArgumentNullException>());
+
+            Assert.That(() => mockMovieRepository.AddMovie(string.Empty, string.Empty, DateTime.Today, string.Empty,
+                null, true, MovieMpaaRating.G, Format.Dvd, string.Empty, string.Empty),
+                Throws.TypeOf<ArgumentNullException>());
+
+            Assert.That(() => mockMovieRepository.AddMovie(string.Empty, string.Empty, DateTime.Today, string.Empty,
+                string.Empty, true, MovieMpaaRating.G, Format.Dvd, null, string.Empty),
+                Throws.TypeOf<ArgumentNullException>());
+
+            Assert.That(() => mockMovieRepository.AddMovie(string.Empty, string.Empty, DateTime.Today, string.Empty,
+                string.Empty, true, MovieMpaaRating.G, Format.Dvd, string.Empty, null),
+                Throws.TypeOf<ArgumentNullException>());
+        }
+
+
+
+        private static void SetupDbSet<TEntity>(Mock<DbSet<TEntity>> mockSet, IQueryable<TEntity> querySet) where TEntity : class
     {
       mockSet.As<IQueryable<TEntity>>().Setup(m => m.Provider).Returns(querySet.Provider);
       mockSet.As<IQueryable<TEntity>>().Setup(m => m.Expression).Returns(querySet.Expression);
